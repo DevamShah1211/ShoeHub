@@ -40,9 +40,6 @@ CREATE TABLE `contact_messages` (
 -- Dumping data for table `contact_messages`
 --
 
-INSERT INTO `contact_messages` (`id`, `name`, `email`, `subject`, `message`, `created_at`) VALUES
-(10, 'Devam shah', 'devam6205@gmail.com', 'hello', 'HOW ARE YOU', '2025-02-23 12:15:10');
-
 -- --------------------------------------------------------
 
 --
@@ -71,10 +68,6 @@ CREATE TABLE `orders` (
 --
 -- Dumping data for table `orders`
 --
-
-INSERT INTO `orders` (`id`, `first_name`, `last_name`, `email`, `address`, `city`, `state`, `zip`, `card_name`, `card_number`, `expiry`, `cvv`, `subtotal`, `shipping`, `total`, `created_at`) VALUES
-(11, 'Devam', 'Shah', 'devam6205@gmail.com', '101 Suvas Kanchan , Near Vakil House , Mahalaxmi Crossroad', 'Ahmedabad', 'Gujarat', '380007', 'Amazon ICICI', '010101010101', '20/05/2', '123', 641999.00, 5.00, 642004.00, '2025-02-23 11:58:07'),
-(12, 'Hiral', 'Shah', 'hiraln123@gmail.com', '101 Suvas Kanchan , Near Vakil House , Mahalaxmi Crossroad', 'Ahmedabad', 'Gujarat', '380007', 'Amazon ICICI', '000000000', '20/05/2', '345', 35998.00, 5.00, 36003.00, '2025-02-23 12:13:37');
 
 -- --------------------------------------------------------
 
@@ -165,8 +158,6 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `email`, `password_hash`, `created_at`) VALUES
 (1, 'john_doe', 'john@example.com', '$2y$10$TKh8H1.PORrs/DZ1EPtUIORvG2zfj12wLFGFtqEEdWZPOaA9lj/bW', '2025-01-06 16:25:50'),
 (2, 'jane_smith', 'jane@example.com', '$2y$10$DxWRqQrz43cnJFPmfP0jXeXkRLJGyXZOVOFZxpQonvW6Nz1zHnhbS', '2025-01-06 16:25:50'),
-(3, 'devam', 'devam6205@gmail.com', '$2y$10$r8ACxQRFAP82/zb470rjjuimIs5a.oGOjecxx69Ku8MOwIv6gGZPa', '2025-01-07 17:03:26');
-
 --
 -- Indexes for dumped tables
 --
