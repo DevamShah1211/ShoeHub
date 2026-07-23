@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoeHub - Order Confirmation</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">ShoeHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container my-5" id="confirmationContainer">
+        <div class="text-center py-5">
+            <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading order details...</span>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <h5>ShoeHub</h5>
+                    <p>Your one-stop destination for premium footwear.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="cart.html" class="text-white text-decoration-none">Cart</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none">About Us</a></li>
+                        <li><a href="contact.html" class="text-white text-decoration-none">Contact</a></li>
+                        <li><a href="products.html" class="text-white text-decoration-none">Products</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <a href="#" class="mx-2"><i class="fa-brands fa-facebook fa-2x" style="color: white !important;"></i></a>
+                    <a href="#" class="mx-2"><i class="fa-brands fa-twitter fa-2x" style="color: white !important;"></i></a>
+                    <a href="#" class="mx-2"><i class="fa-brands fa-instagram fa-2x" style="color: white !important;"></i></a>
+                    <a href="#" class="mx-2"><i class="fa-brands fa-linkedin fa-2x" style="color: white !important;"></i></a>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center mt-3">
+                <p>&copy; 2025 ShoeHub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="config.js"></script>
+    <script>
+        async function loadOrder() {
+            const params = new URLSearchParams(window.location.search);
+            const orderId = params.get('order_id');
+            const container = document.getElementById('confirmationContainer');
+
+            if (!orderId) {
+                container.innerHTML = `<div class="alert alert-danger text-center">Invalid Order ID</div>`;
+                return;
+            }
+
+            let order = null;
+            let items = [];
+
+            if (supabaseClient) {
+                try {
+                    const { data: oData } = await supabaseClient.from('orders').select('*').eq('id', orderId).single();
+                    if (oData) {
+                        order = oData;
+                        const { data: iData } = await supabaseClient.from('order_items').select('*').eq('order_id', orderId);
+                        items = iData || [];
+                    }
+                } catch (e) {
+                    console.log('Order fetch error:', e);
+                }
+            }
+
+            // Fallback to local storage if not found in Supabase
+            if (!order) {
+                const localOrder = localStorage.getItem(`order_${orderId}`);
+                if (localOrder) {
+                    const parsed = JSON.parse(localOrder);
+                    order = parsed.order;
+                    items = parsed.items;
+                }
+            }
+
+            if (!order) {
+                container.innerHTML = `<div class="alert alert-warning text-center">Order #${orderId} confirmed successfully! Thank you for shopping with ShoeHub.</div><div class="text-center mt-4"><a href="index.html" class="btn btn-primary">Back to Home</a></div>`;
+                return;
+            }
+
+            container.innerHTML = `
+                <h1 class="text-center text-success mb-3 fw-bold"><i class="fa-solid fa-circle-check"></i> Order Confirmed!</h1>
+                <p class="text-center fs-5 mb-4">Thank you for your purchase, <strong>${order.first_name || ''} ${order.last_name || ''}</strong>!</p>
+                
+                <div class="card p-4 shadow-sm border-0 mx-auto" style="max-width: 700px;">
+                    <h5 class="fw-bold border-bottom pb-2">Order Details</h5>
+                    <p class="mb-1"><strong>Order ID:</strong> #${order.id || orderId}</p>
+                    <p class="mb-1"><strong>Email:</strong> ${order.email || ''}</p>
+                    <p class="mb-3"><strong>Shipping Address:</strong> ${order.address || ''}, ${order.city || ''}, ${order.state || ''} - ${order.zip || ''}</p>
+
+                    <h5 class="fw-bold mt-3 border-bottom pb-2">Items Ordered</h5>
+                    <ul class="list-group list-group-flush mb-3">
+                        ${items.map(i => `
+                            <li class="list-group-item d-flex justify-content-between px-0">
+                                <span>${i.product_name || i.name} <small class="text-muted">x ${i.quantity}</small></span>
+                                <span>RS ${Number(i.subtotal || (i.price * i.quantity)).toFixed(2)}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+
+                    <hr>
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Subtotal:</span>
+                        <span>RS ${Number(order.subtotal || 0).toFixed(2)}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Shipping:</span>
+                        <span>RS ${Number(order.shipping || 5.00).toFixed(2)}</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between fw-bold fs-5">
+                        <span>Total Paid:</span>
+                        <span>RS ${Number(order.total || 0).toFixed(2)}</span>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="index.html" class="btn btn-primary btn-lg">Continue Shopping</a>
+                </div>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', loadOrder);
+    </script>
+</body>
+</html>

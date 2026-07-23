@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoeHub - Checkout</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">ShoeHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <h1 class="text-center mb-4 fw-bold">Checkout</h1>
+        <form id="checkoutForm">
+            <div class="row">
+                <div class="col-md-8 mb-4">
+                    <div class="card p-4 shadow-sm border-0">
+                        <h5 class="fw-bold mb-3">Shipping Information</h5>
+                        <div class="mb-3"><label class="form-label">First Name</label><input type="text" id="firstName" class="form-control" required></div>
+                        <div class="mb-3"><label class="form-label">Last Name</label><input type="text" id="lastName" class="form-control" required></div>
+                        <div class="mb-3"><label class="form-label">Email</label><input type="email" id="email" class="form-control" required></div>
+                        <div class="mb-3"><label class="form-label">Address</label><input type="text" id="address" class="form-control" required></div>
+                        <div class="mb-3"><label class="form-label">City</label><input type="text" id="city" class="form-control" required></div>
+                        <div class="mb-3"><label class="form-label">State</label><input type="text" id="state" class="form-control" required></div>
+                        <div class="mb-3"><label class="form-label">ZIP Code</label><input type="text" id="zip" class="form-control" required></div>
+                        
+                        <h5 class="fw-bold mb-3 mt-4">Payment Information</h5>
+                        <div class="mb-3"><label class="form-label">Name on Card</label><input type="text" id="cardName" class="form-control" required></div>
+                        <div class="mb-3"><label class="form-label">Card Number</label><input type="text" id="cardNumber" class="form-control" required></div>
+                        <div class="row">
+                            <div class="col-6 mb-3"><label class="form-label">Expiry Date</label><input type="text" id="expiry" placeholder="MM/YY" class="form-control" required></div>
+                            <div class="col-6 mb-3"><label class="form-label">CVV</label><input type="text" id="cvv" class="form-control" required></div>
+                        </div>
+                        <button type="submit" id="placeOrderBtn" class="btn btn-primary w-100 btn-lg mt-3">Place Order</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-4 shadow-sm border-0">
+                        <h5 class="fw-bold mb-3">Order Summary</h5>
+                        <ul class="list-group list-group-flush mb-3" id="orderSummaryList">
+                            <!-- Items -->
+                        </ul>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal:</span>
+                            <span>RS <span id="summarySubtotal">0.00</span></span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Shipping:</span>
+                            <span>RS 5.00</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between fw-bold fs-5">
+                            <span>Total:</span>
+                            <span>RS <span id="summaryTotal">0.00</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <h5>ShoeHub</h5>
+                    <p>Your one-stop destination for premium footwear.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="cart.html" class="text-white text-decoration-none">Cart</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none">About Us</a></li>
+                        <li><a href="contact.html" class="text-white text-decoration-none">Contact</a></li>
+                        <li><a href="products.html" class="text-white text-decoration-none">Products</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <a href="#" class="mx-2"><i class="fa-brands fa-facebook fa-2x" style="color: white !important;"></i></a>
+                    <a href="#" class="mx-2"><i class="fa-brands fa-twitter fa-2x" style="color: white !important;"></i></a>
+                    <a href="#" class="mx-2"><i class="fa-brands fa-instagram fa-2x" style="color: white !important;"></i></a>
+                    <a href="#" class="mx-2"><i class="fa-brands fa-linkedin fa-2x" style="color: white !important;"></i></a>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center mt-3">
+                <p>&copy; 2025 ShoeHub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="config.js"></script>
+    <script>
+        const cart = getCart();
+        const shippingFee = 5.00;
+        let subtotal = 0;
+
+        function loadSummary() {
+            const list = document.getElementById('orderSummaryList');
+            const keys = Object.keys(cart);
+            if (keys.length === 0) {
+                list.innerHTML = `<li class="list-group-item text-center text-muted">Your cart is empty</li>`;
+                document.getElementById('placeOrderBtn').disabled = true;
+                return;
+            }
+
+            list.innerHTML = keys.map(id => {
+                const item = cart[id];
+                const itemSubtotal = item.price * item.quantity;
+                subtotal += itemSubtotal;
+                return `<li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                    <div>${item.name} <small class="text-muted">x ${item.quantity}</small></div>
+                    <span>RS ${itemSubtotal.toFixed(2)}</span>
+                </li>`;
+            }).join('');
+
+            document.getElementById('summarySubtotal').innerText = subtotal.toFixed(2);
+            document.getElementById('summaryTotal').innerText = (subtotal + shippingFee).toFixed(2);
+        }
+
+        document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('placeOrderBtn');
+            btn.disabled = true;
+            btn.innerText = 'Processing Order...';
+
+            const orderData = {
+                first_name: document.getElementById('firstName').value,
+                last_name: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                zip: document.getElementById('zip').value,
+                card_name: document.getElementById('cardName').value,
+                card_number: document.getElementById('cardNumber').value,
+                expiry: document.getElementById('expiry').value,
+                cvv: document.getElementById('cvv').value,
+                subtotal: subtotal,
+                shipping: shippingFee,
+                total: subtotal + shippingFee
+            };
+
+            let createdOrderId = Date.now(); // Fallback ID
+
+            if (supabaseClient) {
+                try {
+                    const { data: orderResp, error: orderErr } = await supabaseClient
+                        .from('orders')
+                        .insert([orderData])
+                        .select('id')
+                        .single();
+
+                    if (!orderErr && orderResp) {
+                        createdOrderId = orderResp.id;
+
+                        // Insert Order Items
+                        const itemsToInsert = Object.values(cart).map(item => ({
+                            order_id: createdOrderId,
+                            product_name: item.name,
+                            quantity: item.quantity,
+                            price: item.price,
+                            subtotal: item.price * item.quantity
+                        }));
+
+                        await supabaseClient.from('order_items').insert(itemsToInsert);
+                    }
+                } catch (err) {
+                    console.error('Error creating order in Supabase:', err);
+                }
+            }
+
+            // Save order locally for fallback display if needed
+            localStorage.setItem(`order_${createdOrderId}`, JSON.stringify({
+                order: { ...orderData, id: createdOrderId },
+                items: Object.values(cart)
+            }));
+
+            // Clear Cart
+            localStorage.removeItem('shoehub_cart');
+
+            // Redirect
+            window.location.href = `confirmation.html?order_id=${createdOrderId}`;
+        });
+
+        document.addEventListener('DOMContentLoaded', loadSummary);
+    </script>
+</body>
+</html>
